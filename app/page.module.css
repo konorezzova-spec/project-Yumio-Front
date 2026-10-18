@@ -1,0 +1,23 @@
+button {
+  background: var(--light-brown);
+}
+/* Enable hover only on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  button:hover,
+  button:focus {
+    background-color: var(--broun);
+  }
+
+  button:active {
+    background-color: var(--light-brown);
+    border-color: var(--white);
+    box-shadow:
+      0 0 0 6px rgba(78, 70, 180, 0.12),
+      0 0 0 2px var(--white);
+  }
+}
+
+@media (max-width: 768px) {
+}
+@media (max-width: 1440px) {
+}
