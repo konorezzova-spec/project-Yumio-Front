@@ -3,8 +3,8 @@ import { cookies } from "next/headers";
 import { parseSetCookie } from "cookie";
 import { checkServerSession } from "./lib/api/serverApi";
 
-const privateRoutes = ["/profile", "/notes", "/about"];
-const publicRoutes = ["/sign-in", "/sign-up"];
+const privateRoutes = ["/profile"];
+const publicRoutes = ["login", "register", "recipes"];
 
 export async function proxy(request: NextRequest) {
   // Шлях, на який користувач намагається перейти
@@ -64,7 +64,7 @@ export async function proxy(request: NextRequest) {
 
     // приватний маршрут — редірект на сторінку входу
     if (isPrivateRoute) {
-      return NextResponse.redirect(new URL("/sign-in", request.url));
+      return NextResponse.redirect(new URL("/login", request.url));
     }
   }
 
@@ -82,9 +82,9 @@ export async function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     "/profile/:path*",
-    "/notes/:path*",
+    "/recipes/:path*",
     "/about/:path*",
-    "/sign-in",
-    "/sign-up",
+    "/login",
+    "/register",
   ],
 };

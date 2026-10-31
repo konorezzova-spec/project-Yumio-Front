@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: "/notes/filter/:slug", // маршрут сторінки
+        source: "/recipes/filter/:slug", // маршрут сторінки
         locale: false,
         headers: [
           {

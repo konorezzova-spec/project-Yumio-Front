@@ -5,11 +5,13 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import ManePageClient from "./ManePage.Client";
+import { connection } from "next/server";
 
 export default async function ManePage() {
+  await connection();
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
-    queryKey: ["notes", { search: "", page: 1 }],
+    queryKey: ["recipes", { search: "", page: 1, perPage: 12 }],
     queryFn: () => fetchRecipes({ search: "", page: 1, perPage: 12 }),
   });
   return (

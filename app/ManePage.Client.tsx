@@ -19,14 +19,13 @@ export default function ManePageClient() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const { data, error, isLoading, isError, isSuccess } = useQuery({
-    queryKey: ["Recipes", { search: "", page: 1, perPafe: 12 }],
+    queryKey: ["Recipes", { search: "", page: 1, perPage: 12 }],
     queryFn: () =>
       fetchRecipes({
         search: "",
         page: currentPage,
         perPage: 12,
       }),
-    enabled: true,
     retry: 1,
     placeholderData: keepPreviousData,
   });
@@ -35,7 +34,7 @@ export default function ManePageClient() {
 
   const getSearchQuery = (search: string) => {
     setSearch(search);
-    router.push("/resipes");
+    router.push("/recipes");
   };
 
   return (
