@@ -23,6 +23,7 @@ export default function RecipeItem({ item }: RecipeItemProps) {
           className={css.image}
           width={337}
           height={230}
+          // unoptimized={item.thumb.startsWith("https://ftp.goit.study/")}
         ></Image>
         <div className={css.title}>
           <h3>{item.title}</h3>

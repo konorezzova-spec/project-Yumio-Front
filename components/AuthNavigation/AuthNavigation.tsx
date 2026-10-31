@@ -48,7 +48,7 @@ export default function AuthNavigation({ onClick }: AuthNavigationProps) {
           <li>
             <Link
               className={`${css.btn} ${css.laptopBtn}`}
-              href="/resipes/action/create"
+              href="/profile/recipes/create"
               prefetch={false}
               onClick={onClick}
             >
@@ -77,7 +77,7 @@ export default function AuthNavigation({ onClick }: AuthNavigationProps) {
           <li>
             <Link
               className={`${css.btn} ${css.mobBtn}`}
-              href="/recipes/action/create"
+              href="/profile/recipes/create"
               prefetch={false}
               onClick={onClick}
             >

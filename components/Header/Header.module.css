@@ -1,14 +1,26 @@
 .header {
-  position: relative;
+  position: fixed;
+  top: 0;
+  z-index: 100;
   padding: 14px 0;
   width: 100%;
   background: var(--darck-brown);
   font-family: var(--font-family);
   font-weight: 600;
   color: var(--white);
+  transition: transform 0.3s ease-in-out;
+
   @media screen and (min-width: 1440px) {
     padding: 24px 0;
   }
+}
+
+.visible {
+  transform: translateY(0);
+}
+
+.hidden {
+  transform: translateY(-100%);
 }
 
 .mobileMenu {

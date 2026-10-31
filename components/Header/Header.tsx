@@ -7,10 +7,34 @@ import Container from "../Container/Container";
 import logo from "/public/logo.svg";
 import burger_menu from "/public/burger_menu.svg";
 import close from "/public/close_btn.svg";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import AuthNavigation from "../AuthNavigation/AuthNavigation";
 
 export default function Header() {
+  const [isVisible, setIsVisible] = useState(true);
+  const prevScrollY = useRef(0);
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY < 80) {
+        setIsVisible(true);
+      } else if (currentScrollY > prevScrollY.current + 5) {
+        setIsVisible(false);
+      } else if (currentScrollY < prevScrollY.current - 5) {
+        setIsVisible(true);
+      }
+
+      prevScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -20,7 +44,7 @@ export default function Header() {
     setIsMenuOpen(false);
   };
   return (
-    <header className={css.header}>
+    <header className={`${css.header} ${isVisible ? css.visible : css.hidden}`}>
       <Container className={css.header_container}>
         <Link
           className={css.home_link}

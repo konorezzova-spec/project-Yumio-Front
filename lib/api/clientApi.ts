@@ -88,7 +88,7 @@ type CheckSessionRequest = {
 };
 
 export const checkSession = async () => {
-  const res = await nextServer.get<CheckSessionRequest>("/auth/session");
+  const res = await nextServer.post<CheckSessionRequest>("/auth/session");
   return res.data.success;
 };
 
