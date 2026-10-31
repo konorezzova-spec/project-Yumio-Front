@@ -1,0 +1,11 @@
+.recipes_container {
+  padding-top: 16px;
+  padding-bottom: 48px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background-color: var(--background);
+}

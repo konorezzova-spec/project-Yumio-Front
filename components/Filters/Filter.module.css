@@ -1,0 +1,30 @@
+.filter_container {
+  padding-top: 48px;
+  h2 {
+    margin-bottom: 16px;
+    text-align: start;
+  }
+}
+.filter_box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: auto;
+  height: 33px;
+  font-family: var(--font-family);
+  color: var(--black);
+  font-weight: 600;
+}
+.filter_recipes {
+  font-size: 18px;
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+
+.filter_icon {
+  fill: var(--black);
+}

@@ -4,7 +4,16 @@ import { montserrat, dm } from "@/app/fonts";
 
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-// import TanstackProvider from "@/components/TanstackProvider/TanstackProvider";
+import css from "./layout.module.css";
+import { cacheLife } from "next/cache";
+import TanStackProvider from "@/components/TanstackProvider/TanstackProvider";
+import AuthProvider from "@/components/AuthProvider/AuthProvider";
+
+async function getCurrentYear() {
+  "use cache";
+  cacheLife("max");
+  return new Date().getFullYear();
+}
 
 const SITE_URL = process.env.SITE_URL;
 if (!SITE_URL) {
@@ -23,8 +32,8 @@ export const metadata: Metadata = {
     url: SITE_URL,
     images: [
       {
-        url: "/public",
-        alt: "product image",
+        url: "/",
+        alt: "Recipe image",
         width: 600,
         height: 300,
       },
@@ -32,15 +41,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+type Props = LayoutProps<"/"> & {
+  modal: React.ReactNode;
+};
+
+export default async function RootLayout({ children, modal }: Props) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${dm.variable}`}>
-      <body>
-        {/* <TanstackProvider> */}
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        {/* </TanstackProvider> */}
+    <html lang="uk" className={`${montserrat.variable} ${dm.variable}`}>
+      <body className={css.body}>
+        <TanStackProvider>
+          <AuthProvider>
+            <Header />
+            <main className={css.main}>{children}</main>
+            {modal}
+            <Footer year={await getCurrentYear()} />
+          </AuthProvider>
+        </TanStackProvider>
       </body>
     </html>
   );
