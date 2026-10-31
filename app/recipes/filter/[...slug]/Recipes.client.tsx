@@ -45,7 +45,7 @@ export default function RecipesClient({ category }: RecipesClientProps) {
     <>
       <Container className={css.app}>
         <SearchBox onSubmit={updateSearchQuery} />
-        {isSuccess && <Filters />}
+        {isSuccess && <Filters total={data.totalItems} />}
         {isLoading && <Loader />}
         {isError && <ErrorMessage message={error.message} />}
 
