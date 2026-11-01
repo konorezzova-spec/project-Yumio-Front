@@ -7,25 +7,26 @@ import Container from "../Container/Container";
 import logo from "/public/logo.svg";
 import burger_menu from "/public/burger_menu.svg";
 import close from "/public/close_btn.svg";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import AuthNavigation from "../AuthNavigation/AuthNavigation";
 
 export default function Header() {
   const [isVisible, setIsVisible] = useState(true);
-  const prevScrollY = useRef(0);
+  // const prevScrollY = useRef(0);
   useEffect(() => {
+    let lastScrollY = window.scrollY;
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
       if (currentScrollY < 80) {
         setIsVisible(true);
-      } else if (currentScrollY > prevScrollY.current + 5) {
+      } else if (currentScrollY > lastScrollY) {
         setIsVisible(false);
-      } else if (currentScrollY < prevScrollY.current - 5) {
+      } else {
         setIsVisible(true);
       }
 
-      prevScrollY.current = currentScrollY;
+      lastScrollY = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -45,7 +46,7 @@ export default function Header() {
   };
   return (
     <header className={`${css.header} ${isVisible ? css.visible : css.hidden}`}>
-      <Container className={css.header_container}>
+      <Container className={`${css.header_container}`}>
         <Link
           className={css.home_link}
           href="/"

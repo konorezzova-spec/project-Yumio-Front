@@ -6,7 +6,7 @@
     linear-gradient(90deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.3) 100%),
     url("/banner.png");
   @media screen and (min-width: 1440px) {
-    background-position: 100% 15%;
+    background-position: 100% 5%;
   }
 }
 
@@ -68,5 +68,13 @@
   }
   .button {
     width: 176px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .input {
+    width: 459px;
+  }
+  .button {
+    width: 190px;
   }
 }

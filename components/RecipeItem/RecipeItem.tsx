@@ -17,14 +17,16 @@ export default function RecipeItem({ item }: RecipeItemProps) {
   return (
     <>
       <li className={css.recipe_container}>
-        <Image
-          src={item.thumb}
-          alt="Recipe image"
-          className={css.image}
-          width={337}
-          height={230}
-          // unoptimized={item.thumb.startsWith("https://ftp.goit.study/")}
-        ></Image>
+        <div className={css.image_container}>
+          <Image
+            src={item.thumb}
+            alt="Recipe image"
+            className={css.image}
+            // width={337}
+            // height={230}
+            fill
+          ></Image>
+        </div>
         <div className={css.title}>
           <h3>{item.title}</h3>
           <div className={css.time}>

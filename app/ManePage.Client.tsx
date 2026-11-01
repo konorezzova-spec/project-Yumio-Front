@@ -43,8 +43,8 @@ export default function ManePageClient() {
       {isSuccess && <Filters total={data.totalItems} />}
       {isLoading && <Loader />}
       {isError && <ErrorMessage message={error.message} />}
-      {data && data.recipes.length > 0 && (
-        <RecipesList recipes={data.recipes} />
+      {data && data?.recipes.length > 0 && (
+        <RecipesList recipes={data?.recipes} />
       )}
       {isSuccess && totalPages > 1 && (
         <Pagination
@@ -53,7 +53,7 @@ export default function ManePageClient() {
           onPageChange={setCurrentPage}
         />
       )}
-      {data && data.recipes.length === 0 && <p>No Recipes found.</p>}
+      {data?.recipes.length === 0 && <p>No Recipes found.</p>}
     </>
   );
 }
