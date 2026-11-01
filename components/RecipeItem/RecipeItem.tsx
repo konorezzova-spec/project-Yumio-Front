@@ -22,9 +22,8 @@ export default function RecipeItem({ item }: RecipeItemProps) {
             src={item.thumb}
             alt="Recipe image"
             className={css.image}
-            // width={337}
-            // height={230}
             fill
+            sizes="(min-width: 1440px) 25vw, (min-width: 768px) 50vw, 100vw"
           ></Image>
         </div>
         <div className={css.title}>
