@@ -38,7 +38,7 @@ export const fetchRecipeById = async (id: RecipeId): Promise<Recipe> => {
 export const checkServerSession = async () => {
   // Дістаємо поточні cookie
   const cookieStore = await cookies();
-  const res = await nextServer.post("/auth/session", {
+  const res = await nextServer.post("/auth/session", null, {
     headers: {
       // передаємо кукі далі
       Cookie: cookieStore.toString(),

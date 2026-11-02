@@ -1,4 +1,4 @@
-.mainContent {
+.main_content {
   padding: 91px 0;
   @media screen and (min-width: 768px) {
     padding: 177px;
@@ -14,7 +14,7 @@
   padding: 48px 32px;
   min-width: 320px;
   max-width: 362px;
-  height: 399px;
+  height: auto;
 
   font-family: var(--font-family);
   background-color: var(--light-beige);

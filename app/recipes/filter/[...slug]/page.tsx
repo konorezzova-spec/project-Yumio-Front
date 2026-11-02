@@ -5,6 +5,8 @@ import {
 } from "@tanstack/react-query";
 import { fetchRecipes } from "@/lib/api/serverApi";
 import RecipesClient from "./Recipes.client";
+import { connection } from "next/server";
+// import { connection } from "next/server";
 // import { Metadata } from "next";
 
 interface ManePageProps {
@@ -45,7 +47,7 @@ interface ManePageProps {
 //   };
 // }
 
-export default async function ManePage({ params }: ManePageProps) {
+export default async function RecipesPage({ params }: ManePageProps) {
   const { slug } = await params;
 
   const category = slug[0] === "all" ? undefined : slug[0];
@@ -53,7 +55,7 @@ export default async function ManePage({ params }: ManePageProps) {
 
   await queryClient
     .query({
-      queryKey: ["Recipes", { search: "", page: 1, category }],
+      queryKey: ["Recipes", { search: "", page: 1, perPage: 12, category }],
       queryFn: () =>
         fetchRecipes({
           search: "",

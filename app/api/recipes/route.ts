@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     const rawTag = request.nextUrl.searchParams.get("category") ?? "";
     const category = rawTag === "All" ? "" : rawTag;
 
-    const res = await api("/recipes", {
+    const res = await api.get("/recipes", {
       params: {
         ...(search !== "" && { search }),
         page,

@@ -31,15 +31,15 @@ export const metadata: Metadata = {
 export default async function ProfilePage() {
   const user = await getMe();
   return (
-    <main className={css.mainContent}>
-      <div className={css.profileCard}>
+    <main className={css.main_content}>
+      <div className={css.profile_card}>
         <div className={css.header}>
-          <h1 className={css.formTitle}>Profile Page</h1>
-          <Link href="/profile/edit" className={css.editProfileButton}>
+          <h1 className={css.form_title}>Profile Page</h1>
+          <Link href="/profile/edit" className={css.edit_profile_button}>
             Edit Profile
           </Link>
         </div>
-        <div className={css.avatarWrapper}>
+        <div className={css.avatar_wrapper}>
           <Image
             src={
               user?.avatar ||
@@ -51,7 +51,7 @@ export default async function ProfilePage() {
             className={css.avatar}
           />
         </div>
-        <div className={css.profileInfo}>
+        <div className={css.profile_info}>
           <p>Username: {user.name}</p>
           <p>Email: {user.email}</p>
         </div>

@@ -7,22 +7,21 @@ import Pagination from "@/components/Pagination/Pugination";
 import RecipesList from "@/components/RecipesList/RecipesList";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import { fetchRecipes } from "@/lib/api/clientApi";
-import { useSearchStore } from "@/lib/store/searchStore";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function ManePageClient() {
-  const router = useRouter();
-  const setSearch = useSearchStore(state => state.setSearch);
-
+  const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
   const { data, error, isLoading, isError, isSuccess } = useQuery({
-    queryKey: ["Recipes", { search: "", page: 1, perPage: 12 }],
+    queryKey: [
+      "Recipes",
+      { search: searchQuery, page: currentPage, perPage: 12 },
+    ],
     queryFn: () =>
       fetchRecipes({
-        search: "",
+        search: searchQuery,
         page: currentPage,
         perPage: 12,
       }),
@@ -33,8 +32,8 @@ export default function ManePageClient() {
   const totalPages = data?.totalPages ?? 0;
 
   const getSearchQuery = (search: string) => {
-    setSearch(search);
-    router.push("/recipes");
+    setSearchQuery(search);
+    setCurrentPage(1);
   };
 
   return (

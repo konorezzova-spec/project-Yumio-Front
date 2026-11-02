@@ -38,7 +38,7 @@ export default function RegisterPage() {
     }
   };
   return (
-    <main className={css.mainContent}>
+    <main className={css.main_content}>
       <Container>
         <form action={handleSubmit} className={css.form}>
           <h2 className={css.formTitle}>Register</h2>

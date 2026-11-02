@@ -19,7 +19,10 @@ export default function RecipeItem({ item }: RecipeItemProps) {
       <li className={css.recipe_container}>
         <div className={css.image_container}>
           <Image
-            src={item.thumb}
+            src={
+              item.thumb ||
+              "https://res.cloudinary.com/rvojizer/image/upload/v1793553598/Default_dish.webp"
+            }
             alt="Recipe image"
             className={css.image}
             fill

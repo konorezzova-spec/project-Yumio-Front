@@ -40,7 +40,7 @@ export default function SignIn() {
 
   return (
     <main>
-      <Container className={css.mainContent}>
+      <Container className={css.main_content}>
         <form action={handleSubmit} className={css.form}>
           <h2 className={css.formTitle}>Login</h2>
 
