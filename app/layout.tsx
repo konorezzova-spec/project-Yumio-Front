@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     images: [
       {
-        url: "/",
+        url: "https://res.cloudinary.com/rvojizer/image/upload/v1793620526/main_picture.jpg.png",
         alt: "Recipe image",
         width: 600,
         height: 300,
