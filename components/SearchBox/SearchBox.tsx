@@ -7,7 +7,8 @@ interface SearchBoxProps {
 
 export default function SearchBox({ onSubmit }: SearchBoxProps) {
   const handleSubmit = (formData: FormData) => {
-    const search = formData.get("search") as string;
+    const rawSearch = formData.get("search") as string;
+    const search = rawSearch.trim();
 
     if (search === "") {
       alert("Please enter search topic!");

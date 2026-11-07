@@ -57,7 +57,7 @@ export default function SignIn() {
           </div>
 
           <div className={css.formGroup}>
-            <label htmlFor="password">Create a strong password</label>
+            <label htmlFor="password">Enter your password</label>
             <input
               id="password"
               type="password"

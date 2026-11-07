@@ -3,7 +3,11 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { fetchRecipes } from "@/lib/api/serverApi";
+import {
+  fetchCategories,
+  fetchingredients,
+  fetchRecipes,
+} from "@/lib/api/serverApi";
 import RecipesClient from "./Recipes.client";
 import { Metadata } from "next";
 import { Suspense } from "react";
@@ -15,6 +19,10 @@ const SITE_URL = process.env.SITE_URL || "/";
 interface ManePageProps {
   params: Promise<{
     slug: string[];
+  }>;
+  searchParams: Promise<{
+    ingredient?: string;
+    // time?: string;
   }>;
 }
 
@@ -52,35 +60,48 @@ export async function generateMetadata({
   };
 }
 
-export default function RecipesPage({ params }: ManePageProps) {
+export default function RecipesPage({ params, searchParams }: ManePageProps) {
   return (
     <Suspense fallback={<Loader />}>
-      <RecipesContent params={params} />
+      <RecipesContent params={params} searchParams={searchParams} />
     </Suspense>
   );
 }
-async function RecipesContent({ params }: ManePageProps) {
-  const { slug } = await params;
+async function RecipesContent({ params, searchParams }: ManePageProps) {
   await connection();
+  const { slug } = await params;
+  const { ingredient } = await searchParams;
+
+  const categories = await fetchCategories();
+  const ingredients = await fetchingredients();
 
   const category = slug[0] === "all" ? undefined : slug[0];
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ["Recipes", { search: "", page: 1, perPage: 12, category }],
+    queryKey: [
+      "Recipes",
+      { search: "", page: 1, perPage: 12, category, ingredient },
+    ],
     queryFn: () =>
       fetchRecipes({
         search: "",
         page: 1,
         perPage: 12,
         category,
+        ingredient,
       }),
   });
 
   return (
     <>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <RecipesClient category={category} />
+        <RecipesClient
+          category={category}
+          categories={categories}
+          ingredients={ingredients}
+          ingredient={ingredient}
+        />
       </HydrationBoundary>
     </>
   );

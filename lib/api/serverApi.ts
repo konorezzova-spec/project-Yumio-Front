@@ -5,7 +5,7 @@ import {
   type RecipesHttpResponse,
   type fetchParams,
 } from "./clientApi";
-import { Recipe } from "@/types/recipe";
+import { Category, Ingredient, Recipe } from "@/types/recipe";
 import { User } from "@/types/user";
 
 export const fetchRecipes = async (
@@ -55,5 +55,15 @@ export const getMe = async () => {
       Cookie: cookieStore.toString(),
     },
   });
+  return data;
+};
+
+export const fetchCategories = async (): Promise<Category[]> => {
+  const { data } = await nextServer.get<Category[]>("/categories");
+  return data;
+};
+
+export const fetchingredients = async (): Promise<Ingredient[]> => {
+  const { data } = await nextServer.get<Ingredient[]>("/ingredients");
   return data;
 };

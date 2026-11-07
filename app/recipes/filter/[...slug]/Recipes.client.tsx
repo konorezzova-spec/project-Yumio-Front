@@ -9,23 +9,42 @@ import { fetchRecipes } from "@/lib/api/clientApi";
 import Pagination from "@/components/Pagination/Pugination";
 import Filters from "@/components/Filters/Filters";
 import RecipesList from "@/components/RecipesList/RecipesList";
+import { Category, Ingredient } from "@/types/recipe";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 interface RecipesClientProps {
+  categories: Category[];
   category: undefined | string;
+  ingredients: Ingredient[];
+  ingredient?: string;
 }
 
-export default function RecipesClient({ category }: RecipesClientProps) {
-  const [searchQuery, setSearchQuery] = useState("");
+export default function RecipesClient({
+  category,
+  categories,
+  ingredients,
+  ingredient,
+}: RecipesClientProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState(
+    () => searchParams.get("search") ?? ""
+  );
   const [currentPage, setCurrentPage] = useState(1);
 
   const { data, error, isLoading, isError, isSuccess } = useQuery({
-    queryKey: ["Recipes", { search: searchQuery, page: currentPage, category }],
+    queryKey: [
+      "Recipes",
+      { search: searchQuery, page: currentPage, category, ingredient },
+    ],
     queryFn: () =>
       fetchRecipes({
         search: searchQuery,
         page: currentPage,
         perPage: 12,
         category,
+        ingredient,
       }),
     enabled: true,
     retry: 1,
@@ -35,6 +54,16 @@ export default function RecipesClient({ category }: RecipesClientProps) {
   const updateSearchQuery = (search: string) => {
     setSearchQuery(search);
     setCurrentPage(1);
+
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (search) {
+      params.set("search", search);
+    } else {
+      params.delete("search");
+    }
+
+    router.replace(`${pathname}?${params.toString()}`);
   };
 
   const totalPages = data?.totalPages ?? 0;
@@ -42,7 +71,14 @@ export default function RecipesClient({ category }: RecipesClientProps) {
   return (
     <>
       <SearchBox onSubmit={updateSearchQuery} />
-      {isSuccess && <Filters total={data.totalItems} />}
+      {isSuccess && (
+        <Filters
+          total={data.totalItems}
+          categories={categories}
+          currentCategory={category}
+          ingredients={ingredients}
+        />
+      )}
       {isLoading && <Loader />}
       {isError && <ErrorMessage message={error.message} />}
 

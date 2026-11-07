@@ -12,7 +12,7 @@ import AuthNavigation from "../AuthNavigation/AuthNavigation";
 
 export default function Header() {
   const [isVisible, setIsVisible] = useState(true);
-  // const prevScrollY = useRef(0);
+
   useEffect(() => {
     let lastScrollY = window.scrollY;
     const handleScroll = () => {
@@ -83,9 +83,9 @@ export default function Header() {
             <Image
               className={css.logo}
               src={burger_menu}
-              alt="logo"
-              width={17}
-              height={12}
+              alt="navigation menu"
+              width={32}
+              height={32}
             />
           )}
         </button>

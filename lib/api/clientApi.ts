@@ -9,6 +9,7 @@ export interface fetchParams {
   page: number;
   perPage: number;
   category?: string;
+  ingredient?: string;
   sortBy?: string;
 }
 export interface RecipesHttpResponse {

@@ -50,8 +50,8 @@
 }
 
 .logo {
-  fill: currentColor;
-  stroke: currentColor;
+  fill: var(--wight);
+  stroke: var(--wight);
 }
 
 .header a:hover {

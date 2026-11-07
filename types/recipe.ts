@@ -1,9 +1,3 @@
-interface Ingred {
-  _id: string;
-  id: string;
-  measure: string;
-}
-
 export interface Recipe {
   _id: string;
   title: string;
@@ -14,7 +8,19 @@ export interface Recipe {
   description: string;
   thumb: string;
   time: number;
-  ingredients: Ingred[];
+  ingredients: Ingredient[];
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface Ingredient {
+  _id: string;
+  name: string;
+  desc: string;
+  img: string;
+}
+
+export interface Category {
+  _id: string;
+  name: string;
 }
